@@ -59,8 +59,7 @@ def run_lora_experiment(rank_value):
     loss_fn = nn.CrossEntropyLoss()
     
     _, base_acc, base_f1 = evaluate_model(base_model, test_loader, loss_fn)
-    print(f"""[Baseline] Качество сырой модели до обучения -> Accuracy: 
-          {base_acc:.4f}, F1: {base_f1:.4f}""")
+    print(f"""[Baseline] Качество сырой модели до обучения -> Accuracy: {base_acc:.4f}, F1: {base_f1:.4f}""")
     
     # 3. Применение LoRA схемы
     # Конфигурируем адаптер под тип задачи SEQ_CLS (Sequence Classification)
@@ -96,8 +95,7 @@ def run_lora_experiment(rank_value):
 
     # 5. Замер качества ПОСЛЕ LoRA-обучения на том же тест-сете
     _, post_acc, post_f1 = evaluate_model(model, test_loader, loss_fn)
-    print(f"""[После LoRA r={rank_value}] Метрики -> Accuracy: {post_acc:.4f}, 
-          F1: {post_f1:.4f}""")
+    print(f"""[После LoRA r={rank_value}] Метрики -> Accuracy: {post_acc:.4f}, F1: {post_f1:.4f}""")
 
     # 6. Сохранение маленьких адаптеров
     if rank_value == 8:  # Для основного прогона сохраняем веса
@@ -116,8 +114,8 @@ def main():
     run_lora_experiment(rank_value=8)
     
     print("\n=== Эксперимент успешно завершён ===")
-    print(f"""Итоговое сравнение точности: Ранг r=4 -> Accuracy: 
-          {acc_r4:.4f} | Ранг r=16 -> Accuracy: {acc_r16:.4f}""")
+    print(f"""Итоговое сравнение точности: 
+           Ранг r=4 -> Accuracy: {acc_r4:.4f} | Ранг r=16 -> Accuracy: {acc_r16:.4f}""")
 
 if __name__ == "__main__":
     main()
